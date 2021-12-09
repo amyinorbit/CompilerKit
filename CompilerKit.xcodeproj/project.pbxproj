@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E10F562D275F7ACA0030E4F9 /* Scanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E10F562B275F7ACA0030E4F9 /* Scanner.cpp */; };
 		E16FDEE7273A9C4B00ED38FE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E16FDEE6273A9C4B00ED38FE /* main.cpp */; };
+		E16FDEF1273AA00000ED38FE /* Program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E16FDEEF273AA00000ED38FE /* Program.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +25,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E10F562B275F7ACA0030E4F9 /* Scanner.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scanner.cpp; sourceTree = "<group>"; };
+		E10F562C275F7ACA0030E4F9 /* Scanner.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Scanner.hpp; sourceTree = "<group>"; };
 		E16FDEE3273A9C4B00ED38FE /* CompilerKit */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CompilerKit; sourceTree = BUILT_PRODUCTS_DIR; };
 		E16FDEE6273A9C4B00ED38FE /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		E16FDEEE273A9CF700ED38FE /* Token.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Token.hpp; sourceTree = "<group>"; };
+		E16FDEEF273AA00000ED38FE /* Program.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Program.cpp; sourceTree = "<group>"; };
+		E16FDEF0273AA00000ED38FE /* Program.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Program.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +64,20 @@
 		E16FDEE5273A9C4B00ED38FE /* CompilerKit */ = {
 			isa = PBXGroup;
 			children = (
+				E16FDEED273A9C5900ED38FE /* CompilerKit */,
 				E16FDEE6273A9C4B00ED38FE /* main.cpp */,
+			);
+			path = CompilerKit;
+			sourceTree = "<group>";
+		};
+		E16FDEED273A9C5900ED38FE /* CompilerKit */ = {
+			isa = PBXGroup;
+			children = (
+				E16FDEEE273A9CF700ED38FE /* Token.hpp */,
+				E16FDEEF273AA00000ED38FE /* Program.cpp */,
+				E16FDEF0273AA00000ED38FE /* Program.hpp */,
+				E10F562B275F7ACA0030E4F9 /* Scanner.cpp */,
+				E10F562C275F7ACA0030E4F9 /* Scanner.hpp */,
 			);
 			path = CompilerKit;
 			sourceTree = "<group>";
@@ -119,6 +139,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E10F562D275F7ACA0030E4F9 /* Scanner.cpp in Sources */,
+				E16FDEF1273AA00000ED38FE /* Program.cpp in Sources */,
 				E16FDEE7273A9C4B00ED38FE /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
