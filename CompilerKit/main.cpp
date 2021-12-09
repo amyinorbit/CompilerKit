@@ -6,7 +6,25 @@
 //
 
 #include <iostream>
-#include "CompilerKit/Token.h"
+#include "CompilerKit/Scanner.hpp"
+
+using namespace AP::CompilerKit;
+
+class PALScanner : public Scanner {
+public:
+    using Scanner::Scanner;
+    
+    std::optional<Token> lexNumber() {
+        return std::nullopt;
+    }
+    
+    Token lex() override {
+        
+        return Token();
+    }
+    
+private:
+};
 
 int main(int argc, const char * argv[]) {
     // insert code here...

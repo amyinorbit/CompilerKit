@@ -24,6 +24,8 @@ namespace AP::CompilerKit {
         static constexpr const char *InvalidToken = "InvalidToken";
         static constexpr const char *InvalidChar = "InvalidChar";
         
+        Token() : type_(InvalidToken), text_(InvalidToken), line_(0), column_(0) {}
+        
         /// Creates a new token.
         Token(const std::string& type, const std::string& text, int line, int col)
         {}
@@ -48,6 +50,8 @@ namespace AP::CompilerKit {
         
         
         // MARK: - Accessors
+        
+        bool is(const std::string& type) const { return type == type_; }
         
         const std::string& type() const { return type_; }
         const std::string& text() const { return text_; }
