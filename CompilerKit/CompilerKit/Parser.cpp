@@ -9,7 +9,7 @@
 
 namespace AP::CompilerKit {
 
-Parser::Parser(Scanner* scanner) : scanner_(scanner), recovering_(false) {
+Parser::Parser(Scanner* scanner) : scanner_(scanner) {
     assert(scanner != nullptr);
 }
 
@@ -33,11 +33,28 @@ bool Parser::match(const std::string& type) {
 }
 
 bool Parser::expect(const std::string &type) {
-    if(recovering_) {
+    if(have(type)) {
+        scanner().lex();
+        return true;
+    }
+    throw syntaxError(type);
+    return false;
+}
+
+const Error& Parser::syntaxError(const std::string& expected) {
+    return errors_.emplace_back(Error::Syntax(expected, current()));
+}
+
+RecoveringParser::RecoveringParser(Scanner* scanner) : Parser(scanner), isRecovering_(false) {
+    
+}
+
+bool RecoveringParser::expect(const std::string &type) {
+    if(isRecovering_) {
         while(!have(type) && !current().is(Token::EndOfFile)) {
             scanner().lex();
         }
-        recovering_ = false;
+        isRecovering_ = false;
         if(have(type)) {
             scanner().lex();
             return true;
@@ -48,11 +65,11 @@ bool Parser::expect(const std::string &type) {
             scanner().lex();
             return true;
         } else {
-            recovering_ = true;
+            syntaxError(type);
+            isRecovering_ = true;
             return false;
         }
     }
 }
-
 
 }

@@ -20,23 +20,22 @@ class Error {
 public:
     
     /// Creates a syntax error for a given expected token type at a given token.
-    Error Syntax(const string& expected, const Token& token);
-    Error IO(const string& message);
+    static Error Syntax(const string& expected, const Token& token);
     
     // MARK: - comparison operators for nice sorting
-    bool operator<(const Error& other);
-    bool operator>(const Error& other);
+    bool operator<(const Error& other) const;
+    bool operator>(const Error& other) const;
     
     // MARK: - printing to the standard output
-    void print(std::ostream& out);
+    void print(std::ostream& out) const;
     
 private:
     Error(const string& type, const string& message, int line, int column);
     
     int line_;
     int column_;
-    const string& type;
-    const string& message;
+    const string& type_;
+    const string& message_;
 };
 
 /// Allows pretty-printing of errors directly to std::cout/std::cerr.
