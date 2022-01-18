@@ -27,8 +27,11 @@ namespace AP::CompilerKit {
         Token() : type_(InvalidToken), text_(InvalidToken), line_(0), column_(0) {}
         
         /// Creates a new token.
-        Token(const std::string& type, const std::string& text, int line, int col)
-        {}
+        Token(const std::string& type, const std::string& text, int line, int col) {}
+        
+        operator bool() const {
+            return type_ != InvalidToken;
+        }
         
         /// Returns the translated value that the token represents.
         template <typename T>
@@ -51,10 +54,16 @@ namespace AP::CompilerKit {
         
         // MARK: - Accessors
         
+        /// Returns whether `this` is of type `type`.
         bool is(const std::string& type) const { return type == type_; }
         
+        /// Returns the type of `this`.
         const std::string& type() const { return type_; }
+        
+        /// Returns the source text that `this` represents.
         const std::string& text() const { return text_; }
+        
+        /// Returns the line and column that `this` starts at in the source text.
         std::pair<int, int> sourceLoc() const { return {line_, column_}; }
         
     private:

@@ -9,10 +9,16 @@
 #define Program_hpp
 
 #include <string>
+#include <vector>
+#include <cstdint>
+#include <iostream>
+
+#define STACK_SIZE (1024)
 
 namespace AP::CompilerKit {
 
 enum class Instruction {
+    Halt,
     Const,
     Load,
     Store,
@@ -30,20 +36,26 @@ enum class Instruction {
     Equals,
     
     Jump,
-    If,
     Loop,
+    IfNot,
 };
 
-class Program {
-public:
-    
-    bool run();
-    
-private:
-    
+struct InterpreterError : public std::runtime_error {
+    using std::runtime_error::runtime_error;
+    virtual ~InterpreterError() {}
 };
+
+struct Program {
+    std::vector<uint8_t> code;
+    std::vector<float> constants;
+    uint16_t variableCount;
+};
+
+/// Runs a program.
+void run(const Program& program);
 
 }
 
+std::ostream& operator<<(std::ostream& out, const AP::CompilerKit::Program& program);
 
 #endif /* Program_hpp */

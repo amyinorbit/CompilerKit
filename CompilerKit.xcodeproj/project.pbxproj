@@ -11,8 +11,9 @@
 		E16FDEE7273A9C4B00ED38FE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E16FDEE6273A9C4B00ED38FE /* main.cpp */; };
 		E16FDEF1273AA00000ED38FE /* Program.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E16FDEEF273AA00000ED38FE /* Program.cpp */; };
 		E1B33CB22762038800B5C7F0 /* Parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1B33CB02762038800B5C7F0 /* Parser.cpp */; };
-		E1B33CB52762177800B5C7F0 /* CodeGen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1B33CB32762177800B5C7F0 /* CodeGen.cpp */; };
+		E1B33CB52762177800B5C7F0 /* Codegen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1B33CB32762177800B5C7F0 /* Codegen.cpp */; };
 		E1B33CB827623D7600B5C7F0 /* Error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1B33CB627623D7600B5C7F0 /* Error.cpp */; };
+		E1BC9FED27970A4600B0FBA5 /* Sema.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1BC9FEB27970A4600B0FBA5 /* Sema.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,10 +38,12 @@
 		E16FDEF0273AA00000ED38FE /* Program.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Program.hpp; sourceTree = "<group>"; };
 		E1B33CB02762038800B5C7F0 /* Parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Parser.cpp; sourceTree = "<group>"; };
 		E1B33CB12762038800B5C7F0 /* Parser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Parser.hpp; sourceTree = "<group>"; };
-		E1B33CB32762177800B5C7F0 /* CodeGen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CodeGen.cpp; sourceTree = "<group>"; };
-		E1B33CB42762177800B5C7F0 /* CodeGen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CodeGen.hpp; sourceTree = "<group>"; };
+		E1B33CB32762177800B5C7F0 /* Codegen.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Codegen.cpp; sourceTree = "<group>"; };
+		E1B33CB42762177800B5C7F0 /* Codegen.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Codegen.hpp; sourceTree = "<group>"; };
 		E1B33CB627623D7600B5C7F0 /* Error.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Error.cpp; sourceTree = "<group>"; };
 		E1B33CB727623D7600B5C7F0 /* Error.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Error.hpp; sourceTree = "<group>"; };
+		E1BC9FEB27970A4600B0FBA5 /* Sema.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sema.cpp; sourceTree = "<group>"; };
+		E1BC9FEC27970A4600B0FBA5 /* Sema.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Sema.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,10 +92,12 @@
 				E10F562C275F7ACA0030E4F9 /* Scanner.hpp */,
 				E1B33CB02762038800B5C7F0 /* Parser.cpp */,
 				E1B33CB12762038800B5C7F0 /* Parser.hpp */,
-				E1B33CB32762177800B5C7F0 /* CodeGen.cpp */,
-				E1B33CB42762177800B5C7F0 /* CodeGen.hpp */,
+				E1B33CB32762177800B5C7F0 /* Codegen.cpp */,
+				E1B33CB42762177800B5C7F0 /* Codegen.hpp */,
 				E1B33CB627623D7600B5C7F0 /* Error.cpp */,
 				E1B33CB727623D7600B5C7F0 /* Error.hpp */,
+				E1BC9FEB27970A4600B0FBA5 /* Sema.cpp */,
+				E1BC9FEC27970A4600B0FBA5 /* Sema.hpp */,
 			);
 			path = CompilerKit;
 			sourceTree = "<group>";
@@ -157,9 +162,10 @@
 				E1B33CB827623D7600B5C7F0 /* Error.cpp in Sources */,
 				E1B33CB22762038800B5C7F0 /* Parser.cpp in Sources */,
 				E10F562D275F7ACA0030E4F9 /* Scanner.cpp in Sources */,
-				E1B33CB52762177800B5C7F0 /* CodeGen.cpp in Sources */,
+				E1B33CB52762177800B5C7F0 /* Codegen.cpp in Sources */,
 				E16FDEF1273AA00000ED38FE /* Program.cpp in Sources */,
 				E16FDEE7273A9C4B00ED38FE /* main.cpp in Sources */,
+				E1BC9FED27970A4600B0FBA5 /* Sema.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
