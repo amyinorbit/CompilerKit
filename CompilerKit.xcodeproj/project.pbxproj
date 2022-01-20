@@ -54,6 +54,7 @@
 		E1BC9FF6279896C300B0FBA5 /* PALParser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PALParser.hpp; sourceTree = "<group>"; };
 		E1BC9FF82798A7B900B0FBA5 /* PALSema.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PALSema.cpp; sourceTree = "<group>"; };
 		E1BC9FF92798A7B900B0FBA5 /* PALSema.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PALSema.hpp; sourceTree = "<group>"; };
+		E1E18CDA2799B0490070AFCB /* index.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = index.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +124,7 @@
 		E1BC9FF12798837700B0FBA5 /* Docs */ = {
 			isa = PBXGroup;
 			children = (
+				E1E18CDA2799B0490070AFCB /* index.md */,
 			);
 			path = Docs;
 			sourceTree = "<group>";
