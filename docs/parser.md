@@ -18,10 +18,13 @@ using namespace AP::CompilerKit;
 
 class MyParser : public Parser {
 public:
-
-}
-
-
+    MyParser(Scanner& scanner) : Parser(scanner) {}
+    virtual ~MyParser {}
+    
+    void compile() {
+        ...
+    }
+};
 ```
 
 
@@ -33,7 +36,7 @@ Parser::Parser(Scanner& scanner)
 
 Creates a new instance of `Parser`.
 
-### Parameters:
+#### Parameters:
 
 - `scanner`: the `Scanner` instance used to generate tokens from the source string.
 
@@ -60,10 +63,10 @@ instances of `Parser`.
 Parser::addError(const Error& error)
 ```
 
-Logs one compilation error. Errors can be logged from anywhere, and are not necessarily syntax
+Emits a compilation error. Errors can be emitted from anywhere, and are not necessarily syntax
 errors. For instances of `Parser`, the error will be thrown after it has been logged.
 
-### Parameters
+#### Parameters
 
 - `error`: a new error to log.
 
@@ -95,7 +98,7 @@ Parser::have(const std::string& type) const -> bool
 
 Returns whether the last token lexed by the scanner attached to `this` is of a given type.
 
-### Parameters:
+#### Parameters:
 
 - `type`: the type of token to check for.
 
@@ -108,7 +111,7 @@ Parser::match(const std::string& type) -> bool
 Checks whether the last token lexed by the scanner attached to `this` is of a given type. If
 it is, lexes one more token and returns true, otherwise returns false.
 
-### Parameters:
+#### Parameters:
 
 - `type`: the type of token to check for.
 
@@ -121,7 +124,7 @@ Parser::expect(const std::string& type) -> bool
 Checks that the last token lexed by the scanner attached to `this` is of a given type. If it is,
 lexes one more token and returns true. If it isn't, emits a syntax error and returns false.
 
-### Parameters:
+#### Parameters:
 
 - `type`: the type of token to check for.
 
@@ -133,7 +136,7 @@ Parser::syntaxError(const std::string& expected) -> void
 
 Emits a syntax error, informing the user that a token of a unexpected type was found.
 
-### Parameters:
+#### Parameters:
 
 - `expected`: the type of token that was expected.
 
