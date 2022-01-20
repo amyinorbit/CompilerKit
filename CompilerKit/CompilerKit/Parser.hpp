@@ -30,7 +30,7 @@ public:
     
     virtual void addError(const Error& error);
 protected:
-//    friend class Sema;
+    std::vector<Error> errors_;
     
     /// Returns the scanner's current token. Same as `calling scanner().current()`.
     Token current() const;
@@ -52,7 +52,6 @@ protected:
     void syntaxError(const std::string& expected);
     
 private:
-    std::vector<Error> errors_;
     Scanner& scanner_;
 };
 
