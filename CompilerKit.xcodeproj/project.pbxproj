@@ -75,7 +75,7 @@
 			children = (
 				E1BC9FF2279883D100B0FBA5 /* .gitignore */,
 				E1BC9FF12798837700B0FBA5 /* docs */,
-				E16FDEE5273A9C4B00ED38FE /* CompilerKit */,
+				E16FDEE5273A9C4B00ED38FE /* src */,
 				E16FDEE4273A9C4B00ED38FE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,7 +88,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E16FDEE5273A9C4B00ED38FE /* CompilerKit */ = {
+		E16FDEE5273A9C4B00ED38FE /* src */ = {
 			isa = PBXGroup;
 			children = (
 				E16FDEED273A9C5900ED38FE /* CompilerKit */,
@@ -100,7 +100,7 @@
 				E1BC9FF82798A7B900B0FBA5 /* PALSema.cpp */,
 				E1BC9FF92798A7B900B0FBA5 /* PALSema.hpp */,
 			);
-			path = CompilerKit;
+			path = src;
 			sourceTree = "<group>";
 		};
 		E16FDEED273A9C5900ED38FE /* CompilerKit */ = {
