@@ -1,7 +1,7 @@
 #  CompilerKit/Scanner
 
 ```c++
-include "CompilerKit/Scanner.hpp"
+include "CompilerKit/Scanner::hpp"
 using namespace AP::CompilerKit;
 
 class MyScanner: public Scanner {
@@ -55,7 +55,7 @@ null character, `\0`.
 These methods are available when writing a class that derives from `Scanner`.
 
 ```c++
-Scanner.startToken() -> void
+Scanner::startToken() -> void
 ```
 
 Marks the current position in the source text as the start of a token. Use in combination with
@@ -65,7 +65,7 @@ Marks the current position in the source text as the start of a token. Use in co
 
 
 ```c++
-Scanner.peek() -> char
+Scanner::peek() -> char
 ```
 
 Returns the character in the source string that `this` is currently at.
@@ -74,7 +74,7 @@ Returns the character in the source string that `this` is currently at.
 
 
 ```c++
-Scanner.line() const -> int
+Scanner::line() const -> int
 ```
 
 Returns the line number in the source string that `this` is currently at.
@@ -83,7 +83,7 @@ Returns the line number in the source string that `this` is currently at.
 
 
 ```c++
-Scanner.column() const -> int
+Scanner::column() const -> int
 ```
 
 Returns the line number in the source string that `this` is currently at.
@@ -92,7 +92,7 @@ Returns the line number in the source string that `this` is currently at.
 
 
 ```c++
-Scanner.makeToken(const std::string& type) -> Token
+Scanner::makeToken(const std::string& type) -> Token
 ```
 
 Creates a new token of a given type, assigns it as the current token, and returns it.
@@ -107,7 +107,7 @@ Creates a new token of a given type, assigns it as the current token, and return
 
 
 ```c++
-Scanner.makeToken(const std::string& type, const std::string& text) -> Token
+Scanner::makeToken(const std::string& type, const std::string& text) -> Token
 ```
 
 Creates a new token of a given type, assigns it as the current token, and returns it. This
@@ -122,7 +122,7 @@ and text are different (number literals, non-keyword identifiers, etc).
 
 
 ```c++
-Scanner.updateTokenStart() -> void
+Scanner::updateTokenStart() -> void
 ```
 
 Sets the point in the source at which a new token starts. This is called once you've consumed
