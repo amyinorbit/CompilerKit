@@ -20,13 +20,21 @@ must implement at least the `Token lex()` function**.
 
 These methods can be called on `Token` from anywhere in the source code.
 
+***
+
+
 ### `Scanner::Scanner(const std::string& source)`
 
 Creates a new scanner that operates on `source`.
 
+***
+
 ### `Scanner::current() const -> Token`
 
 Returns the last token that was lexed by `this`.
+
+***
+
 
 ### `Scanner::advance() -> char`
 
@@ -34,34 +42,54 @@ Advances the scanner by one more character in the source string, if it is availa
 and returns it. If the scanner is at the end of the source string, it will always return the
 null character, `\0`.
 
+***
+
+
 ## Protected Interface
 
 These methods are available when writing a class that derives from `Scanner`.
-
 
 ### `Scanner.startToken() -> void`
 
 Marks the current position in the source text as the start of a token. Use in combination with
 `makeToken()`.
 
+***
+
+
 ### `Scanner.peek() -> char`
 
 Returns the character in the source string that `this` is currently at.
+
+***
+
 
 ### `Scanner.line() const -> int`
 
 Returns the line number in the source string that `this` is currently at.
 
+***
+
+
 ### `Scanner.column() const -> int`
 
 Returns the line number in the source string that `this` is currently at.
+
+***
+
 
 ### `Scanner.makeToken(const std::string& type) -> Token`
 
 Creates a new token of a given type, assigns it as the current token, and returns it.
 
+***
+
+
 #### Parameters:
  - `type`: the type of token to create. See [`Token`](token.html) for existing types.
+
+***
+
 
 ### `Scanner.makeToken(const std::string& type, const std::string& text) -> Token`
 
@@ -72,6 +100,9 @@ and text are different (number literals, non-keyword identifiers, etc).
 #### Parameters:
  - `type`: the type of token to create. See [`Token`](token.html) for existing types.
  - `text`: the text of the new token.
+
+***
+
 
 ### `Scanner.updateTokenStart() -> void`
 
