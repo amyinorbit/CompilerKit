@@ -38,3 +38,42 @@ null character, `\0`.
 
 These methods are available when writing a class that derives from `Scanner`.
 
+
+### `Scanner.startToken() -> void`
+
+Marks the current position in the source text as the start of a token. Use in combination with
+`makeToken()`.
+
+### `Scanner.peek() -> char`
+
+Returns the character in the source string that `this` is currently at.
+
+### `Scanner.line() const -> int`
+
+Returns the line number in the source string that `this` is currently at.
+
+### `Scanner.column() const -> int`
+
+Returns the line number in the source string that `this` is currently at.
+
+### `Scanner.makeToken(const std::string& type) -> Token`
+
+Creates a new token of a given type, assigns it as the current token, and returns it.
+
+#### Parameters:
+ - `type`: the type of token to create. See [`Token`](token.html) for existing types.
+
+### `Scanner.makeToken(const std::string& type, const std::string& text) -> Token`
+
+Creates a new token of a given type, assigns it as the current token, and returns it. This
+methods also lets your provide text for the token, and should be used for tokens where the type
+and text are different (number literals, non-keyword identifiers, etc).
+
+#### Parameters:
+ - `type`: the type of token to create. See [`Token`](token.html) for existing types.
+ - `text`: the text of the new token.
+
+### `Scanner.updateTokenStart() -> void`
+
+Sets the point in the source at which a new token starts. This is called once you've consumed
+any whitespace before a token.
