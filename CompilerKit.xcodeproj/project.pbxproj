@@ -14,6 +14,9 @@
 		E1B33CB52762177800B5C7F0 /* Codegen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1B33CB32762177800B5C7F0 /* Codegen.cpp */; };
 		E1B33CB827623D7600B5C7F0 /* Error.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1B33CB627623D7600B5C7F0 /* Error.cpp */; };
 		E1BC9FED27970A4600B0FBA5 /* Sema.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1BC9FEB27970A4600B0FBA5 /* Sema.cpp */; };
+		E1BC9FF42798846400B0FBA5 /* PALScanner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1BC9FF32798846400B0FBA5 /* PALScanner.cpp */; };
+		E1BC9FF7279896C300B0FBA5 /* PALParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1BC9FF5279896C300B0FBA5 /* PALParser.cpp */; };
+		E1BC9FFA2798A7B900B0FBA5 /* PALSema.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E1BC9FF82798A7B900B0FBA5 /* PALSema.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,6 +47,13 @@
 		E1B33CB727623D7600B5C7F0 /* Error.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Error.hpp; sourceTree = "<group>"; };
 		E1BC9FEB27970A4600B0FBA5 /* Sema.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sema.cpp; sourceTree = "<group>"; };
 		E1BC9FEC27970A4600B0FBA5 /* Sema.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Sema.hpp; sourceTree = "<group>"; };
+		E1BC9FEF2798812A00B0FBA5 /* PALScanner.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PALScanner.hpp; sourceTree = "<group>"; };
+		E1BC9FF2279883D100B0FBA5 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		E1BC9FF32798846400B0FBA5 /* PALScanner.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PALScanner.cpp; sourceTree = "<group>"; };
+		E1BC9FF5279896C300B0FBA5 /* PALParser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PALParser.cpp; sourceTree = "<group>"; };
+		E1BC9FF6279896C300B0FBA5 /* PALParser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PALParser.hpp; sourceTree = "<group>"; };
+		E1BC9FF82798A7B900B0FBA5 /* PALSema.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PALSema.cpp; sourceTree = "<group>"; };
+		E1BC9FF92798A7B900B0FBA5 /* PALSema.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PALSema.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +70,8 @@
 		E16FDEDA273A9C4B00ED38FE = {
 			isa = PBXGroup;
 			children = (
+				E1BC9FF2279883D100B0FBA5 /* .gitignore */,
+				E1BC9FF12798837700B0FBA5 /* Docs */,
 				E16FDEE5273A9C4B00ED38FE /* CompilerKit */,
 				E16FDEE4273A9C4B00ED38FE /* Products */,
 			);
@@ -77,7 +89,13 @@
 			isa = PBXGroup;
 			children = (
 				E16FDEED273A9C5900ED38FE /* CompilerKit */,
+				E1BC9FF5279896C300B0FBA5 /* PALParser.cpp */,
+				E1BC9FF6279896C300B0FBA5 /* PALParser.hpp */,
 				E16FDEE6273A9C4B00ED38FE /* main.cpp */,
+				E1BC9FEF2798812A00B0FBA5 /* PALScanner.hpp */,
+				E1BC9FF32798846400B0FBA5 /* PALScanner.cpp */,
+				E1BC9FF82798A7B900B0FBA5 /* PALSema.cpp */,
+				E1BC9FF92798A7B900B0FBA5 /* PALSema.hpp */,
 			);
 			path = CompilerKit;
 			sourceTree = "<group>";
@@ -100,6 +118,13 @@
 				E1BC9FEC27970A4600B0FBA5 /* Sema.hpp */,
 			);
 			path = CompilerKit;
+			sourceTree = "<group>";
+		};
+		E1BC9FF12798837700B0FBA5 /* Docs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Docs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,10 +186,13 @@
 			files = (
 				E1B33CB827623D7600B5C7F0 /* Error.cpp in Sources */,
 				E1B33CB22762038800B5C7F0 /* Parser.cpp in Sources */,
+				E1BC9FF7279896C300B0FBA5 /* PALParser.cpp in Sources */,
+				E1BC9FFA2798A7B900B0FBA5 /* PALSema.cpp in Sources */,
 				E10F562D275F7ACA0030E4F9 /* Scanner.cpp in Sources */,
 				E1B33CB52762177800B5C7F0 /* Codegen.cpp in Sources */,
 				E16FDEF1273AA00000ED38FE /* Program.cpp in Sources */,
 				E16FDEE7273A9C4B00ED38FE /* main.cpp in Sources */,
+				E1BC9FF42798846400B0FBA5 /* PALScanner.cpp in Sources */,
 				E1BC9FED27970A4600B0FBA5 /* Sema.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -19,7 +19,7 @@ namespace AP::CompilerKit {
 /// A simple recursive descent parser that aborts parsing on the first error.
 class Parser {
 public:
-    Parser(Scanner* scanner);
+    Parser(Scanner& scanner);
     virtual ~Parser() {}
     
     /// Returns a list of the errors that have occured during compilation.
@@ -28,6 +28,7 @@ public:
     /// Returns whether the parser is currently in recovery mode.
     virtual bool isRecovering() const { return false; }
 protected:
+    friend class Sema;
     
     /// Returns the scanner's current token. Same as `calling scanner().current()`.
     Token current() const;
@@ -46,24 +47,27 @@ protected:
     virtual bool expect(const std::string& type);
     
     /// Emits a syntax error, and aborts parse.
-    virtual const Error& syntaxError(const std::string& expected);
-private:
+    void syntaxError(const std::string& expected);
     
-    std::unique_ptr<Scanner> scanner_;
+    virtual void addError(const Error& error);
+    
     std::vector<Error> errors_;
+private:
+    Scanner& scanner_;
 };
 
 
 /// A more advanced recursive descent parser that can recover from syntax errors.
 class RecoveringParser : public Parser {
 public:
-    RecoveringParser(Scanner* scanner);
+    RecoveringParser(Scanner& scanner);
     virtual ~RecoveringParser() {}
     
     /// Returns whether the parser is currently in recovery mode.
     virtual bool isRecovering() const { return isRecovering_; }
     
 protected:
+    virtual void addError(const Error& error);
     bool expect(const std::string& type) final;
 private:
     bool isRecovering_ = false;

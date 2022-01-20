@@ -21,6 +21,7 @@ public:
     
     /// Creates a syntax error for a given expected token type at a given token.
     static Error Syntax(const string& expected, const Token& token);
+    static Error Semantic(const string& message, const Token& token);
     
     // MARK: - comparison operators for nice sorting
     bool operator<(const Error& other) const;
@@ -30,12 +31,13 @@ public:
     void print(std::ostream& out) const;
     
 private:
+    
     Error(const string& type, const string& message, int line, int column);
     
     int line_;
     int column_;
-    const string& type_;
-    const string& message_;
+    string type_;
+    string message_;
 };
 
 /// Allows pretty-printing of errors directly to std::cout/std::cerr.

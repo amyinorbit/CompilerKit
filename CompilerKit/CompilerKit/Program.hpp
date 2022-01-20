@@ -19,11 +19,14 @@ namespace AP::CompilerKit {
 
 enum class Instruction {
     Halt,
+    Noop,
     Const,
     Load,
     Store,
     Input,
     Output,
+    
+    Neg,
     Add,
     Sub,
     Mul,

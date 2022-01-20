@@ -24,13 +24,15 @@ public:
     
     /// Returns the last token lexed by the scanner.
     Token current() const;
-protected:
-    
-    /// Marks the current position in the source text as the start of a token. Use in combination with `makeToken()`.
-    void startToken();
     
     /// Advances the lexer by one character in the source, and returns that character.
     char advance();
+    
+protected:
+    
+    /// Marks the current position in the source text as the start of a token.
+    /// Use in combination with `makeToken()`.
+    void startToken();
     
     /// Returns the next character;
     char peek();
@@ -47,6 +49,9 @@ protected:
     /// Creates a new token of a given type and text, assigns it as the current token, and returns it.
     Token makeToken(const std::string& type, const std::string& text);
     
+    /// Sets the point where a token starts. Call this when lexing!
+    void updateTokenStart();
+    
 private:
     
     Token current_;
@@ -54,6 +59,9 @@ private:
     int line_ = 1;
     int column_ = 1;
     int idx_ = 0;
+    
+    int startLine_ = 1;
+    int startColumn_ = 0;
 };
 
 

@@ -33,11 +33,16 @@ Token Scanner::current() const {
 }
 
 Token Scanner::makeToken(const std::string &type) {
-    return current_ = Token(type, type, line(), column());
+    return current_ = Token(type, type, startLine_, startColumn_);
 }
 
 Token Scanner::makeToken(const std::string &type, const std::string &text) {
-    return current_ = Token(type, text, line(), column());
+    return current_ = Token(type, text, startLine_, startColumn_);
+}
+
+void Scanner::updateTokenStart() {
+    startLine_ = line();
+    startColumn_ = column();
 }
 
 char Scanner::peek() {

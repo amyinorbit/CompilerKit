@@ -27,7 +27,8 @@ namespace AP::CompilerKit {
         Token() : type_(InvalidToken), text_(InvalidToken), line_(0), column_(0) {}
         
         /// Creates a new token.
-        Token(const std::string& type, const std::string& text, int line, int col) {}
+        Token(const std::string& type, const std::string& text, int line, int col)
+            : type_(type), text_(text), line_(line), column_(col) {}
         
         operator bool() const {
             return type_ != InvalidToken;
@@ -39,9 +40,9 @@ namespace AP::CompilerKit {
         
         /// Returns the floating-point value the token represents.
         template <>
-        double value<double>() const {
+        float value<float>() const {
             if(type_ != Integer && type_ != Real) return 0;
-            return std::stod(text_);
+            return std::stof(text_);
         }
         
         /// Returns the integer value the token represents.

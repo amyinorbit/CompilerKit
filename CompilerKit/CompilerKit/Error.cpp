@@ -15,10 +15,16 @@ Error Error::Syntax(const string &expected, const Token &token) {
     std::stringstream stream;
     
     stream << "expected " << expected;
-    stream << ", found " << token.type() << "instead";
+    stream << ", found " << token.type() << " instead";
     auto [line, col] = token.sourceLoc();
     
     return Error("syntax", stream.str(), line, col);
+}
+
+
+Error Error::Semantic(const string& message, const Token& token) {
+    auto [line, col] = token.sourceLoc();
+    return Error("semantic", message, line, col);
 }
 
 Error::Error(const string& type, const string& message, int line, int column)

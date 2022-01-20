@@ -70,7 +70,7 @@ uint16_t Codegen::offsetTo(Location loc) {
 // where we start and stop our loops. The only thing this does is mark where we need to jump back
 // when the loop repeats.
 void Codegen::startLoop() {
-    loopStack_.emplace_back(code_.size(), SIZE_MAX);
+    loopStack_.push_back(LoopData{code_.size(), SIZE_MAX});
 }
 
 // This is a bit more interesting. The way loops work in bytecode is:
@@ -111,12 +111,12 @@ void Codegen::endLoop() {
     // Two things here:
     // - first we jump back to the start of the loop (where the condition is tested).
     // - second, we patch the end jump to point here.
-    emit(Instruction::Loop, offsetTo(data.start));
+    emit(Instruction::Loop, static_cast<uint16_t>(offsetTo(data.start) + 3));
     patchJump(data.endJump);
 }
 
 void Codegen::startConditional() {
-    ifStack_.emplace_back(UINT16_MAX, UINT16_MAX);
+    ifStack_.push_back(IfData{UINT16_MAX, UINT16_MAX});
 }
 
 void Codegen::startIfBody() {
@@ -148,15 +148,18 @@ void Codegen::endConditional() {
 
 Codegen::Location Codegen::emitJump(Instruction instr) {
     emit(instr);
-    return code_.size();
+    Location loc = code_.size();
+    code_.push_back(0xff);
+    code_.push_back(0xff);
+    return loc;
 }
 
 void Codegen::patchJump(Location loc) {
     check(loc < code_.size() - 1, "%d is not a valid jump location", (int)loc);
     
-    uint16_t offset = offsetTo(loc);
+    uint16_t offset = offsetTo(loc+2);
     code_[loc] = offset >> 16;
-    code_[loc] = offset & 0xff;
+    code_[loc+1] = offset & 0xff;
 }
 
 uint16_t Codegen::variableAddress(const std::string& name) {
@@ -177,7 +180,7 @@ void Codegen::emitVariableInstr(Instruction instr, const std::string& name) {
 
 Program Codegen::getProgram() {
     emit(Instruction::Halt);
-    return Program{code_, constants_, variables_};
+    return Program{code_, constants_, static_cast<uint16_t>(variables_.size())};
 }
 
 

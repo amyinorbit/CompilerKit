@@ -7,12 +7,14 @@
 
 #include "Program.hpp"
 #include <iomanip>
+#include <utility>
 
 // This is where the magic happens!
 //
 // If you're here, well done! Remember, you do *not* need to understand (or even use) this to
 // get full marks on your assessment. However, there's a tonne of interesting things happening here.
 //
+int disassembleInstr(std::ostream& out, const uint8_t *ip);
 namespace AP::CompilerKit {
 
 using std::vector;
@@ -29,7 +31,8 @@ public:
         }
         stack = new Value[STACK_SIZE];
         sp = stack;
-        ip = &program.code[0];
+        code = program.code.data();
+        ip = code;
     }
     
     ~Runtime() {
@@ -39,8 +42,25 @@ public:
         sp = nullptr;
     }
     
+    void debugStack() {
+        std::cout << "\t\t> stack (" << int(sp - stack) << "): ";
+        for(const Value* v = stack; v < sp; ++v) {
+            std::cout << v->f32 << "/" << (v->b ? "true" : "false") << " ";
+        }
+        std::cout << "\n";
+    }
+    
+    void debugInstr() {
+        std::cout << std::setfill('0') << std::setw(4) << std::hex;
+        std::cout << (ip - code) << "\t";
+        std::cout << std::setw(0) << std::setfill(' ') << std::dec;
+        disassembleInstr(std::cout, ip);
+        std::cout << "\n";
+    }
+    
     // Returns the next instruction in the program.
     Instruction readi() {
+        
         return static_cast<Instruction>(read8());
     }
     
@@ -71,12 +91,18 @@ public:
     }
     
     // Push a value onto the operand stack.
-    template <typename T>
-    void push(T val) {
+    void push(float val) {
         if(sp >= stack + STACK_SIZE) {
             throw InterpreterError("VM stack overflow");
         }
-        *(sp++) = Value{val};
+        (sp++)->f32 = val;
+    }
+    
+    void push(bool val) {
+        if(sp >= stack + STACK_SIZE) {
+            throw InterpreterError("VM stack overflow");
+        }
+        (sp++)->b = val;
     }
     
     template <typename T>
@@ -101,6 +127,7 @@ public:
     }
     
 private:
+    
     union Value {
         float   f32;
         bool    b;
@@ -108,6 +135,7 @@ private:
     float *variables;
     Value *stack;
     Value *sp;
+    const uint8_t *code;
     const uint8_t *ip;
 };
 
@@ -122,11 +150,16 @@ void run(const Program& program) {
     // to it: every time we loop (once "cpu" cycle), we fetch the next instruction in the program
     // memory, then execute it (using that big switch statement).
     while(true) {
+        //rt.debugStack();
+        //rt.debugInstr();
         Instruction i = rt.readi();
         float input;
         switch(i) {
             case Instruction::Halt:
                 return;
+                
+            case Instruction::Noop:
+                break;
                 
             case Instruction::Const:
                 rt.push(program.constants[rt.read16()]);
@@ -144,6 +177,13 @@ void run(const Program& program) {
                 break;
             case Instruction::Output:
                 std::cout << "output: " << rt.pop<float>() << "\n";
+                break;
+                
+            case Instruction::Neg:
+                {
+                    float a = rt.pop<float>();
+                    rt.push(-a);
+                }
                 break;
             case Instruction::Add:
                 {
@@ -238,8 +278,9 @@ void run(const Program& program) {
 
 static inline void print16(std::ostream& out, const uint8_t *ip) {
 //    return ip[1] << 16 | ip[2];
+    uint16_t op = (ip[1] << 16) | ip[2];
     out << std::setfill('0') << std::setw(4) << std::hex;
-    out << (ip[1] << 16 | ip[2]);
+    out << op;
     out << std::setw(0) << std::setfill(' ') << std::dec;
 }
 
@@ -250,6 +291,9 @@ int disassembleInstr(std::ostream& out, const uint8_t *ip) {
     switch(i) {
         case Instruction::Halt:
             out << "halt";
+            return 1;
+        case Instruction::Noop:
+            out << "noop";
             return 1;
         case Instruction::Const:
             out << "const\t";
@@ -268,6 +312,9 @@ int disassembleInstr(std::ostream& out, const uint8_t *ip) {
             return 1;
         case Instruction::Output:
             out << "out";
+            return 1;
+        case Instruction::Neg:
+            out << "neg";
             return 1;
         case Instruction::Add:
             out << "add";
@@ -300,15 +347,15 @@ int disassembleInstr(std::ostream& out, const uint8_t *ip) {
             out << "equals";
             return 1;
         case Instruction::Jump:
-            out << "jump";
+            out << "jump\t";
             print16(out, ip);
             return 3;
         case Instruction::Loop:
-            out << "loop";
+            out << "loop\t";
             print16(out, ip);
             return 3;
         case Instruction::IfNot:
-            out << "ifnot";
+            out << "ifnot\t";
             print16(out, ip);
             return 3;
     }
@@ -320,12 +367,12 @@ std::ostream& operator<<(std::ostream& out, const AP::CompilerKit::Program& prog
     
     const uint8_t *code = program.code.data();
     
-    for(size_t i = 0; i < program.code.size(); ++i) {
+    for(size_t i = 0; i < program.code.size();) {
         out << std::setfill('0') << std::setw(4) << std::hex;
         out << i;
         out << std::setw(0) << std::setfill(' ') << std::dec;
         out << "\t";
-        disassembleInstr(out, code + i);
+        i += disassembleInstr(out, code + i);
         out << "\n";
     }
     

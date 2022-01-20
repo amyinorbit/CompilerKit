@@ -9,17 +9,15 @@
 
 namespace AP::CompilerKit {
 
-Parser::Parser(Scanner* scanner) : scanner_(scanner) {
-    assert(scanner != nullptr);
+Parser::Parser(Scanner& scanner) : scanner_(scanner) {
 }
 
 Scanner& Parser::scanner() {
-    assert(scanner_);
-    return *scanner_;
+    return scanner_;
 }
 
 Token Parser::current() const {
-    return scanner_->current();
+    return scanner_.current();
 }
 
 bool Parser::have(const std::string& type) const {
@@ -37,15 +35,20 @@ bool Parser::expect(const std::string &type) {
         scanner().lex();
         return true;
     }
-    throw syntaxError(type);
+    syntaxError(type);
     return false;
 }
 
-const Error& Parser::syntaxError(const std::string& expected) {
-    return errors_.emplace_back(Error::Syntax(expected, current()));
+void Parser::syntaxError(const std::string& expected) {
+    addError(Error::Syntax(expected, current()));
 }
 
-RecoveringParser::RecoveringParser(Scanner* scanner) : Parser(scanner), isRecovering_(false) {
+void Parser::addError(const Error &error) {
+    errors_.push_back(error);
+    throw error;
+}
+
+RecoveringParser::RecoveringParser(Scanner& scanner) : Parser(scanner), isRecovering_(false) {
     
 }
 
@@ -70,6 +73,11 @@ bool RecoveringParser::expect(const std::string &type) {
             return false;
         }
     }
+}
+
+
+void RecoveringParser::addError(const Error& error) {
+    errors_.push_back(error);
 }
 
 }
