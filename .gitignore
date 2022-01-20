@@ -1,5 +1,6 @@
 PALScanner.*
 PALParser.*
 PALSema.*
+src/pal/*
 .DS_Store
 *.xcodeproj
