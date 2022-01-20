@@ -27,8 +27,10 @@ public:
     
     /// Returns whether the parser is currently in recovery mode.
     virtual bool isRecovering() const { return false; }
+    
+    virtual void addError(const Error& error);
 protected:
-    friend class Sema;
+//    friend class Sema;
     
     /// Returns the scanner's current token. Same as `calling scanner().current()`.
     Token current() const;
@@ -49,10 +51,8 @@ protected:
     /// Emits a syntax error, and aborts parse.
     void syntaxError(const std::string& expected);
     
-    virtual void addError(const Error& error);
-    
-    std::vector<Error> errors_;
 private:
+    std::vector<Error> errors_;
     Scanner& scanner_;
 };
 

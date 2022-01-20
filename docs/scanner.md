@@ -1,24 +1,31 @@
-#  CompilerKit/Scanner
-
-```c++
-include "CompilerKit/Scanner::hpp"
-using namespace AP::CompilerKit;
-
-class MyScanner: public Scanner {
-    ...
-    Token lex() override { }
-    ...
-};
-```
+#  AP::CompilerKit::Scanner
 
 `Scanner` is the base class you will use to create your lexical analyser. It provides convenience
 methods to advance and consume the source string, and to generate source tokens that can then be
 processed by further stages of your compiler. **When implementing a scanner based on `Scanner`, you
 must implement at least the `Token lex()` function**.
 
+
+
+```c++
+include "CompilerKit/Scanner::hpp"
+using namespace AP::CompilerKit;
+
+class MyScanner : public Scanner {
+public:
+
+    MyScanner(const std::string& source) : Scanner(source) {}
+    virtual ~MyScanner() {}
+    
+    Token lex() override {
+        return makeToken(Token::Invalid);
+    }
+};
+```
+
 ## Public Interface
 
-These methods can be called on `Token` from anywhere in the source code.
+These methods can be called on `Parser` from anywhere in the source code.
 
 ***
 
@@ -96,9 +103,6 @@ Scanner::makeToken(const std::string& type) -> Token
 ```
 
 Creates a new token of a given type, assigns it as the current token, and returns it.
-
-***
-
 
 #### Parameters:
  - `type`: the type of token to create. See [`Token`](token.html) for existing types.
