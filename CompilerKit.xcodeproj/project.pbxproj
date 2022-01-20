@@ -72,7 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				E1BC9FF2279883D100B0FBA5 /* .gitignore */,
-				E1BC9FF12798837700B0FBA5 /* Docs */,
+				E1BC9FF12798837700B0FBA5 /* docs */,
 				E16FDEE5273A9C4B00ED38FE /* CompilerKit */,
 				E16FDEE4273A9C4B00ED38FE /* Products */,
 			);
@@ -121,12 +121,12 @@
 			path = CompilerKit;
 			sourceTree = "<group>";
 		};
-		E1BC9FF12798837700B0FBA5 /* Docs */ = {
+		E1BC9FF12798837700B0FBA5 /* docs */ = {
 			isa = PBXGroup;
 			children = (
 				E1E18CDA2799B0490070AFCB /* index.md */,
 			);
-			path = Docs;
+			path = docs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

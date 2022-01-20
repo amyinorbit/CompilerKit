@@ -1,37 +1,17 @@
-## Welcome to GitHub Pages
+#  CompilerKit Introduction
 
-You can use the [editor on GitHub](https://github.com/amyinorbit/CompilerKit/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
+CompilerKit is a small toolkit used to build recursive-descent parsers and compilers. There are
+four main parts to CompilerKit, each discussed and documented on their own page:
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+ * [`Scanner`](scanner/), which is used to build the lexical analysis portion of your compiler;
+ * [`Parser`](parser/), and the derived `RecoveringParser`, which are used to build recursive
+   descent parsers;
+ * [`Sema`](sema/), which provides tools to build the semantic analysis portion of your compiler;
+ * and [`Codegen`](codegen/), an artifact generator that lets you emit small programs that run in
+   a simplistic virtual machine.
+   
+There are also some ancillary modules that are used throughout the source:
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/amyinorbit/CompilerKit/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+ * [`Error`](errors/) defines an error type and convenience functions to report them;
+ * [`Program`](program-runtime/) defines a simplistic machine language and lets you emit and run
+   programs in a basic virtual machine runtime.
