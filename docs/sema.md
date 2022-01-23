@@ -27,8 +27,8 @@ A small value type that represents a symbol in a symbol table. The available fie
 
 This class represents declaration scope in the parsed language. Unlike other classes in
 CompilerKit, instances of `Scope` are not created by calling the constructor. Instead, the static
-functions `open()` and `close()` are provided and ensure that new scopes are always considered
-part of the previous scope.
+functions `open()` and `close()` are provided, and ensure that newly-created scopes are
+enclosed by older ones.
 
 Instances of scope are used to declare symbols, and query already-declared symbols.
 
@@ -37,7 +37,7 @@ static Scope::open() -> Scope*
 ```
 
 Opens a new scope and returns it. If there is already an open scope, makes the new scope the
-current one and ensures that the previous scope is made its parent.
+current one and ensures that the previous scope encloses it.
 
 ***
 
@@ -45,7 +45,8 @@ current one and ensures that the previous scope is made its parent.
 static Scope::close() -> void
 ```
 
-Closes the current scope if there is one. Once a scope is closed, it cannot be recovered.
+Closes the current scope if there is one, and make the enclosing scope the currentone. Once a
+scope is closed, it cannot be recovered.
 
 ***
 
@@ -62,8 +63,8 @@ Scope::define(const Token& token, Type type) -> bool
 ```
 
 Defines a new symbol with a given token and type in the current scope. If no other symbol is
-defined in the current scope stack with the same name, returns true. Otherwise, defines nothing
-and returns false.
+defined in the current scope, or any of its enclosing ones, with the same name, returns true.
+Otherwise, defines nothing and returns false.
 
 **Parameters:**
 
