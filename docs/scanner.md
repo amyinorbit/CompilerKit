@@ -104,7 +104,8 @@ Scanner::makeToken(const std::string& type) -> Token
 
 Creates a new token of a given type, assigns it as the current token, and returns it.
 
-#### Parameters:
+**Parameters:**
+
  - `type`: the type of token to create. See [`Token`](token.html) for existing types.
 
 ***
@@ -118,7 +119,8 @@ Creates a new token of a given type, assigns it as the current token, and return
 methods also lets your provide text for the token, and should be used for tokens where the type
 and text are different (number literals, non-keyword identifiers, etc).
 
-#### Parameters:
+**Parameters:**
+
  - `type`: the type of token to create. See [`Token`](token.html) for existing types.
  - `text`: the text of the new token.
 
