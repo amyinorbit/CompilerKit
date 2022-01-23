@@ -57,6 +57,8 @@ public:
     Sema(Parser& parser) : parser_(parser) {}
     virtual ~Sema() {}
     
+protected:
+    
     const void semaError(const Token& token, const std::string& message);
     
     /// Reports a type mismatch: left-hand side type doesn't match right-hand side type in a binary expression.

@@ -1,5 +1,10 @@
 #  Semantics
 
+The types documented on this page provide the tools needed to build the semantic analysis portion
+of your compiler: [types](#apcompilerkittype), [symbols](#apcompilerkitsymbol) and
+[scopes](#apcompilerkitscope), as well as a skeletton from which to derive your semantic analyser,
+[Sema](#apcompilerkitsema).
+
 ## AP::CompilerKit::Type
 
 An enumerator that describes the type of a language object.
@@ -100,7 +105,108 @@ or `nullptr` if the name doesn't match any symbols.
 
 ## AP::CompilerKit::Sema
 
+`Sema` is the class from which your semantic analyser will derive. It provides an API that can be
+used to emit various types of semantic errors.
 
+### Public API
 
+```c++
+Sema::Sema(Parser& parser)
+```
 
+Creates a new instance of `Sema` that uses the given parser to emit and record errors.
+
+**Parameters:**
+
+- `parser`: the `Parser` instance that `this` will use to emit errors.
+
+### Protected API
+
+```c++
+Sema::semanticError(const Token& token, const std::string& message) -> void
+```
+
+Emits a generic semantic error at a token's location.
+
+**Parameters:**
+
+- `token`: the token at which the error is.
+- `message`: the error message to present to the user.
+
+***
+
+```c++
+Sema::binaryExprError(const Token& op, Type lhs, Type rhs) -> void
+```
+
+Emits a type mismatch error in a binary expression:
+
+> semantic error at 10:23: invalid operands to binary expression: 'Integer' + 'Boolean'
+
+**Parameters:**
+
+- `op`: the token that represents the operator.
+- `lhs`: the type of the left-hand side member of the operation.
+- `rhs`: the type of the right-hand side member of the operation.
+
+***
+
+```c++
+Sema::booleanExprError(const Token& op, Type lhs, Type rhs) -> void
+```
+
+Emits a type mismatch error in a boolean expression.
+
+> semantic error at 10:23: invalid operands to boolean expression: 'Integer' < 'Boolean'
+
+**Parameters:**
+
+- `op`: the token that represents the operator.
+- `lhs`: the type of the left-hand side member of the operation.
+- `rhs`: the type of the right-hand side member of the operation.
+
+***
+
+```c++
+Sema::assignmentError(const Token& var, Type lhs, Type rhs) -> void
+```
+
+Emits a type mismatch error in a variable assignment
+
+> semantic error at 10:23: assigning variable 'abc' of type 'Integer' from incompatible type
+> 'Boolean'
+
+**Parameters:**
+
+- `var`: the token that represents the variable.
+- `lhs`: the type of the left-hand side member of the operation (the variable).
+- `rhs`: the type of the right-hand side member of the operation (the expression).
+
+***
+
+```c++
+Sema::undeclaredError(const Token& var) -> void
+```
+
+Emits an undeclared-variable error.
+
+> use of undeclared variable 'abc'
+
+**Parameters:**
+
+- `var`: the token that references the variable that isn't declared.
+
+***
+
+```c++
+Sema::redeclaredError(const Token& var) -> void
+```
+
+Emits a variable re-declaration error.
+
+> redefinition of variable 'abc'
+
+**Parameters:**
+
+- `var`: the token that re-declares the variable.
 
