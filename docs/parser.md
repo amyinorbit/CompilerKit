@@ -11,7 +11,6 @@ from `Parser`, the first call to `addError()` will also `throw()`. If it is deri
 `RecoveringParser`, then errors will be stored, and the parser will go into recovery.
 
 
-
 ```c++
 include "CompilerKit/Parser::hpp"
 using namespace AP::CompilerKit;
@@ -30,9 +29,7 @@ public:
 
 ## Public Interface
 
-```c++
-Parser::Parser(Scanner& scanner)
-```
+#### `Parser(Scanner& scanner)`
 
 Creates a new instance of `Parser`.
 
@@ -40,28 +37,17 @@ Creates a new instance of `Parser`.
 
 - `scanner`: the `Scanner` instance used to generate tokens from the source string.
 
-***
 
-```c++
-Parser::errors() const -> const std::vector<Error>&
-```
+#### `errors() const -> const std::vector<Error>&`
 
 Returns a list of errors that have occurred during parsing.
 
-***
-
-```c++
-Parser::isRecovering() const -> bool
-```
+#### `isRecovering() const -> bool`
 
 Returns whether the parser is currently in recovery or not. Will always be `false` for straight
 instances of `Parser`.
 
-***
-
-```c++
-Parser::addError(const Error& error)
-```
+#### `addError(const Error& error)`
 
 Emits a compilation error. Errors can be emitted from anywhere, and are not necessarily syntax
 errors. For instances of `Parser`, the error will be thrown after it has been logged.
@@ -75,26 +61,20 @@ errors. For instances of `Parser`, the error will be thrown after it has been lo
 
 These methods are available when writing a class that derives from `Parser`.
 
-```c++
-Parser::scanner() -> Scanner&
-```
+#### `scanner() -> Scanner&`
 
 Returns the `Scanner` instance attached to `this`.
 
-***
 
-```c++
-Parser::current() -> Token
-```
+#### `current() -> Token`
+
 
 Returns the last token lexed by the `Scanner` instance attached to `this`. Equivalent to
 calling `parser.scanner().current()`.
 
-***
 
-```c++
-Parser::have(const std::string& type) const -> bool
-```
+#### `have(const std::string& type) const -> bool`
+
 
 Returns whether the last token lexed by the scanner attached to `this` is of a given type.
 
@@ -102,11 +82,8 @@ Returns whether the last token lexed by the scanner attached to `this` is of a g
 
 - `type`: the type of token to check for.
 
-***
 
-```c++
-Parser::match(const std::string& type) -> bool
-```
+#### `match(const std::string& type) -> bool`
 
 Checks whether the last token lexed by the scanner attached to `this` is of a given type. If
 it is, lexes one more token and returns true, otherwise returns false.
@@ -115,11 +92,8 @@ it is, lexes one more token and returns true, otherwise returns false.
 
 - `type`: the type of token to check for.
 
-***
 
-```c++
-Parser::expect(const std::string& type) -> bool
-```
+#### `expect(const std::string& type) -> bool`
 
 Checks that the last token lexed by the scanner attached to `this` is of a given type. If it is,
 lexes one more token and returns true. If it isn't, emits a syntax error and returns false.
@@ -128,11 +102,8 @@ lexes one more token and returns true. If it isn't, emits a syntax error and ret
 
 - `type`: the type of token to check for.
 
-***
 
-```c++
-Parser::syntaxError(const std::string& expected) -> void
-```
+#### `syntaxError(const std::string& expected) -> void`
 
 Emits a syntax error, informing the user that a token of a unexpected type was found.
 

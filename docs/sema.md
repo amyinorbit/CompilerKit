@@ -37,35 +37,24 @@ enclosed by older ones.
 
 Instances of scope are used to declare symbols, and query already-declared symbols.
 
-```c++
-static Scope::open() -> Scope*
-```
+
+#### `static Scope::open() -> Scope*`
 
 Opens a new scope and returns it. If there is already an open scope, makes the new scope the
 current one and ensures that the previous scope encloses it.
 
-***
 
-```c++
-static Scope::close() -> void
-```
+#### `static Scope::close() -> void`
 
 Closes the current scope if there is one, and make the enclosing scope the currentone. Once a
 scope is closed, it cannot be recovered.
 
-***
-
-```c++
-static Scope::current() -> Scope*
-```
+#### `static Scope::current() -> Scope*`
 
 Returns the deepest scope currently open, or `nullptr` if none is open.
 
-***
 
-```c++
-Scope::define(const Token& token, Type type) -> bool
-```
+#### `define(const Token& token, Type type) -> bool`
 
 Defines a new symbol with a given token and type in the current scope. If no other symbol is
 defined in the current scope, or any of its enclosing ones, with the same name, returns true.
@@ -77,11 +66,7 @@ Otherwise, defines nothing and returns false.
   previously-declared symbol.
 - `type`: the language type of the new symbol.
 
-***
-
-```c++
-Scope::isDefined(const std::string& name) const -> bool
-```
+#### `isDefined(const std::string& name) const -> bool`
 
 Returns whether the current scope, or any of its enclosing scopes, contains a symbol declared for
 the given name.
@@ -90,11 +75,7 @@ the given name.
 
 - `name` the name of the symbol to search for.
 
-***
-
-```c++
-Scope::get(const std::string& name) const -> const Symbol*
-```
+#### `get(const std::string& name) const -> const Symbol*`
 
 Returns the symbol defined in the current scope or any of its enclosing scopes for a given name,
 or `nullptr` if the name doesn't match any symbols.
@@ -110,9 +91,7 @@ used to emit various types of semantic errors.
 
 ### Public API
 
-```c++
-Sema::Sema(Parser& parser)
-```
+#### `Sema(Parser& parser)`
 
 Creates a new instance of `Sema` that uses the given parser to emit and record errors.
 
@@ -122,9 +101,7 @@ Creates a new instance of `Sema` that uses the given parser to emit and record e
 
 ### Protected API
 
-```c++
-Sema::semanticError(const Token& token, const std::string& message) -> void
-```
+#### `semanticError(const Token& token, const std::string& message) -> void`
 
 Emits a generic semantic error at a token's location.
 
@@ -133,11 +110,8 @@ Emits a generic semantic error at a token's location.
 - `token`: the token at which the error is.
 - `message`: the error message to present to the user.
 
-***
 
-```c++
-Sema::binaryExprError(const Token& op, Type lhs, Type rhs) -> void
-```
+#### `binaryExprError(const Token& op, Type lhs, Type rhs) -> void`
 
 Emits a type mismatch error in a binary expression:
 
@@ -149,11 +123,8 @@ Emits a type mismatch error in a binary expression:
 - `lhs`: the type of the left-hand side member of the operation.
 - `rhs`: the type of the right-hand side member of the operation.
 
-***
 
-```c++
-Sema::booleanExprError(const Token& op, Type lhs, Type rhs) -> void
-```
+#### `booleanExprError(const Token& op, Type lhs, Type rhs) -> void`
 
 Emits a type mismatch error in a boolean expression.
 
@@ -165,11 +136,8 @@ Emits a type mismatch error in a boolean expression.
 - `lhs`: the type of the left-hand side member of the operation.
 - `rhs`: the type of the right-hand side member of the operation.
 
-***
 
-```c++
-Sema::assignmentError(const Token& var, Type lhs, Type rhs) -> void
-```
+#### `assignmentError(const Token& var, Type lhs, Type rhs) -> void`
 
 Emits a type mismatch error in a variable assignment
 
@@ -182,11 +150,8 @@ Emits a type mismatch error in a variable assignment
 - `lhs`: the type of the left-hand side member of the operation (the variable).
 - `rhs`: the type of the right-hand side member of the operation (the expression).
 
-***
 
-```c++
-Sema::undeclaredError(const Token& var) -> void
-```
+#### `undeclaredError(const Token& var) -> void`
 
 Emits an undeclared-variable error.
 
@@ -196,11 +161,8 @@ Emits an undeclared-variable error.
 
 - `var`: the token that references the variable that isn't declared.
 
-***
 
-```c++
-Sema::redeclaredError(const Token& var) -> void
-```
+#### `redeclaredError(const Token& var) -> void`
 
 Emits a variable re-declaration error.
 

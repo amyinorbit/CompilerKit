@@ -6,7 +6,6 @@ processed by further stages of your compiler. **When implementing a scanner base
 must implement at least the `Token lex()` function**.
 
 
-
 ```c++
 include "CompilerKit/Scanner::hpp"
 using namespace AP::CompilerKit;
@@ -27,28 +26,15 @@ public:
 
 These methods can be called on `Parser` from anywhere in the source code.
 
-***
-
-```c++
-Scanner::Scanner(const std::string& source)
-```
+#### `Scanner::Scanner(const std::string& source)`
 
 Creates a new scanner that operates on `source`.
 
-***
-
-```c++
-Scanner::current() const -> Token
-```
+#### `current() const -> Token`
 
 Returns the last token that was lexed by `this`.
 
-***
-
-
-```c++
-Scanner::advance() -> char
-```
+#### `advance() -> char`
 
 Advances the scanner by one more character in the source string, if it is available,
 and returns it. If the scanner is at the end of the source string, it will always return the
@@ -61,46 +47,25 @@ null character, `\0`.
 
 These methods are available when writing a class that derives from `Scanner`.
 
-```c++
-Scanner::startToken() -> void
-```
+
+#### `Scanner::startToken() -> void`
 
 Marks the current position in the source text as the start of a token. Use in combination with
 `makeToken()`.
 
-***
-
-
-```c++
-Scanner::peek() -> char
-```
+#### `peek() -> char`
 
 Returns the character in the source string that `this` is currently at.
 
-***
-
-
-```c++
-Scanner::line() const -> int
-```
+#### `line() const -> int`
 
 Returns the line number in the source string that `this` is currently at.
 
-***
-
-
-```c++
-Scanner::column() const -> int
-```
+#### `column() const -> int`
 
 Returns the line number in the source string that `this` is currently at.
 
-***
-
-
-```c++
-Scanner::makeToken(const std::string& type) -> Token
-```
+#### `makeToken(const std::string& type) -> Token`
 
 Creates a new token of a given type, assigns it as the current token, and returns it.
 
@@ -108,12 +73,7 @@ Creates a new token of a given type, assigns it as the current token, and return
 
  - `type`: the type of token to create. See [`Token`](token.html) for existing types.
 
-***
-
-
-```c++
-Scanner::makeToken(const std::string& type, const std::string& text) -> Token
-```
+#### `makeToken(const std::string& type, const std::string& text) -> Token`
 
 Creates a new token of a given type, assigns it as the current token, and returns it. This
 methods also lets your provide text for the token, and should be used for tokens where the type
@@ -124,12 +84,7 @@ and text are different (number literals, non-keyword identifiers, etc).
  - `type`: the type of token to create. See [`Token`](token.html) for existing types.
  - `text`: the text of the new token.
 
-***
-
-
-```c++
-Scanner::updateTokenStart() -> void
-```
+#### `updateTokenStart() -> void`
 
 Sets the point in the source at which a new token starts. This is called once you've consumed
 any whitespace before a token.
