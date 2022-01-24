@@ -1,5 +1,7 @@
 #  Semantics
 
+{:toc}
+
 The types documented on this page provide the tools needed to build the semantic analysis portion
 of your compiler: [types](#apcompilerkittype), [symbols](#apcompilerkitsymbol) and
 [scopes](#apcompilerkitscope), as well as a skeletton from which to derive your semantic analyser,
