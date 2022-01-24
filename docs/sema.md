@@ -37,22 +37,24 @@ enclosed by older ones.
 
 Instances of scope are used to declare symbols, and query already-declared symbols.
 
+### Static API
 
-#### `static Scope::open() -> Scope*`
+#### `Scope::open() -> Scope*`
 
 Opens a new scope and returns it. If there is already an open scope, makes the new scope the
 current one and ensures that the previous scope encloses it.
 
 
-#### `static Scope::close() -> void`
+#### `Scope::close() -> void`
 
 Closes the current scope if there is one, and make the enclosing scope the currentone. Once a
 scope is closed, it cannot be recovered.
 
-#### `static Scope::current() -> Scope*`
+#### `Scope::current() -> Scope*`
 
 Returns the deepest scope currently open, or `nullptr` if none is open.
 
+### Public API
 
 #### `define(const Token& token, Type type) -> bool`
 
