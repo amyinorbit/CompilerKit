@@ -12,7 +12,7 @@
 #include <iostream>
 #include <string>
 
-namespace AP::CompilerKit {
+namespace CompilerKit {
 
 using std::string;
 

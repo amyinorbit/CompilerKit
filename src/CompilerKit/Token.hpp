@@ -10,7 +10,7 @@
 
 #include <string>
 
-namespace AP::CompilerKit {
+namespace CompilerKit {
     class Token final {
     public:
         /// A token that represents an identifier.

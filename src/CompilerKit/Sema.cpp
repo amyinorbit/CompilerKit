@@ -8,7 +8,7 @@
 #include "Sema.hpp"
 #include <sstream>
 
-namespace AP::CompilerKit {
+namespace CompilerKit {
 
 Scope* Scope::current_ = nullptr;
 
@@ -106,9 +106,9 @@ const void Sema::redeclaredError(const Token& var) {
 
 }
 
-std::ostream& operator<<(std::ostream& out, AP::CompilerKit::Type type) {
-    using AP::CompilerKit::Type;
-    out << AP::CompilerKit::typeToString(type);
+std::ostream& operator<<(std::ostream& out, CompilerKit::Type type) {
+    using CompilerKit::Type;
+    out << CompilerKit::typeToString(type);
     return out;
 }
 

@@ -15,7 +15,7 @@
 // get full marks on your assessment. However, there's a tonne of interesting things happening here.
 //
 int disassembleInstr(std::ostream& out, const uint8_t *ip);
-namespace AP::CompilerKit {
+namespace CompilerKit {
 
 using std::vector;
 using std::string;
@@ -285,7 +285,7 @@ static inline void print16(std::ostream& out, const uint8_t *ip) {
 }
 
 int disassembleInstr(std::ostream& out, const uint8_t *ip) {
-    using AP::CompilerKit::Instruction;
+    using CompilerKit::Instruction;
     Instruction i = static_cast<Instruction>(ip[0]);
     out << std::setfill('0');
     switch(i) {
@@ -362,7 +362,7 @@ int disassembleInstr(std::ostream& out, const uint8_t *ip) {
 }
 
 
-std::ostream& operator<<(std::ostream& out, const AP::CompilerKit::Program& program) {
+std::ostream& operator<<(std::ostream& out, const CompilerKit::Program& program) {
     out << "== disassembly ==\n";
     
     const uint8_t *code = program.code.data();

@@ -13,7 +13,7 @@
 #include <map>
 #include <vector>
 
-namespace AP::CompilerKit {
+namespace CompilerKit {
 
 class Codegen {
 public:

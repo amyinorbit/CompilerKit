@@ -1,4 +1,4 @@
-# AP::CompilerKit::Parser
+# CompilerKit::Parser
 
 `Parser`, and the derived `RecoveringParser`, are base classes that provide you with tools to
 build a recursive-descent parser. It implements the three functions such parsers require, `have()`,
@@ -13,7 +13,7 @@ from `Parser`, the first call to `addError()` will also `throw()`. If it is deri
 
 ```c++
 include "CompilerKit/Parser::hpp"
-using namespace AP::CompilerKit;
+using namespace CompilerKit;
 
 class MyParser : public Parser {
 public:
@@ -112,5 +112,5 @@ Emits a syntax error, informing the user that a token of a unexpected type was f
 - `expected`: the type of token that was expected.
 
 
-# AP::CompilerKit::RecoveringParser
+# CompilerKit::RecoveringParser
 

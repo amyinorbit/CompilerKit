@@ -1,4 +1,4 @@
-# AP::CompilerKit::Codegen
+# CompilerKit::Codegen
 
 `Codegen` provides an API that can be used to create small but wokring binary programs using
 the virtual instruction set described in [`Program`](program.html). It follows `Program`'s

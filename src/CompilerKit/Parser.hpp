@@ -14,7 +14,7 @@
 #include <memory>
 #include <vector>
 
-namespace AP::CompilerKit {
+namespace CompilerKit {
 
 /// A simple recursive descent parser that aborts parsing on the first error.
 class Parser {

@@ -9,7 +9,7 @@
 #include <cstdio>
 #include <cstdarg>
 
-namespace AP::CompilerKit {
+namespace CompilerKit {
 
 // If we have errors in codegen, it's a programming error, not a user error. Crash hard & early
 // so we can debug!

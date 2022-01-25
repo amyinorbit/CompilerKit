@@ -1,11 +1,11 @@
 #  Semantics
 
 The types documented on this page provide the tools needed to build the semantic analysis portion
-of your compiler: [types](#apcompilerkittype), [symbols](#apcompilerkitsymbol) and
-[scopes](#apcompilerkitscope), as well as a skeletton from which to derive your semantic analyser,
-[Sema](#apcompilerkitsema).
+of your compiler: [types](#compilerkittype), [symbols](#compilerkitsymbol) and
+[scopes](#compilerkitscope), as well as a skeletton from which to derive your semantic analyser,
+[Sema](#compilerkitsema).
 
-## AP::CompilerKit::Type
+## CompilerKit::Type
 
 An enumerator that describes the type of a language object.
 
@@ -14,7 +14,7 @@ An enumerator that describes the type of a language object.
 - `Type::Boolean`: a boolean type.
 - `Type::Invalid`: an invalid type, which can be used to pass errors to `Sema`.
 
-## AP::CompilerKit::Symbol
+## CompilerKit::Symbol
 
 ```c++
 struct Symbol {
@@ -28,7 +28,7 @@ A small value type that represents a symbol in a symbol table. The available fie
 - `token`: the source token that declares the symbol (variable declaration for example).
 - `type`: the language type of the symbol.
 
-## AP::CompilerKit::Scope
+## CompilerKit::Scope
 
 This class represents declaration scope in the parsed language. Unlike other classes in
 CompilerKit, instances of `Scope` are not created by calling the constructor. Instead, the static
@@ -86,7 +86,7 @@ or `nullptr` if the name doesn't match any symbols.
 
 - `name` the name of the symbol to search for.
 
-## AP::CompilerKit::Sema
+## CompilerKit::Sema
 
 `Sema` is the class from which your semantic analyser will derive. It provides an API that can be
 used to emit various types of semantic errors.

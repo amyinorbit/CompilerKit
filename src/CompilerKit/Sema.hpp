@@ -14,7 +14,7 @@
 #include <string>
 #include <map>
 
-namespace AP::CompilerKit {
+namespace CompilerKit {
 
 enum class Type {
     Integer,
@@ -76,6 +76,6 @@ private:
 
 }
 
-std::ostream& operator<<(std::ostream& out, AP::CompilerKit::Type type);
+std::ostream& operator<<(std::ostream& out, CompilerKit::Type type);
 
 #endif /* Sema_hpp */

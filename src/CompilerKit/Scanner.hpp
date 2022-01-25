@@ -9,14 +9,14 @@
 #define Scanner_hpp
 
 #include "Token.hpp"
-#include <optional>
+#include <iostream>
 
-namespace AP::CompilerKit {
+namespace CompilerKit {
 
 class Scanner {
 public:
     /// Creates a new scanner for a given source text.
-    Scanner(const std::string& source);
+    Scanner(std::istream& source);
     virtual ~Scanner() {}
     
     /// Lexes one more token from the source. You must override this in your implementation.
@@ -54,11 +54,10 @@ protected:
     
 private:
     
+    std::istream& in_;
     Token current_;
-    std::string source_;
     int line_ = 1;
     int column_ = 1;
-    int idx_ = 0;
     
     int startLine_ = 1;
     int startColumn_ = 0;

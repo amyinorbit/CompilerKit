@@ -7,7 +7,7 @@
 
 #include "Parser.hpp"
 
-namespace AP::CompilerKit {
+namespace CompilerKit {
 
 Parser::Parser(Scanner& scanner) : scanner_(scanner) {
 }

@@ -7,18 +7,16 @@
 
 #include "Scanner.hpp"
 
-namespace AP::CompilerKit {
+namespace CompilerKit {
 
-Scanner::Scanner(const std::string& source)
-    : source_(source)
+Scanner::Scanner(std::istream& source)
+    : in_(source)
     , line_(1)
-    , column_(1)
-    , idx_(0) { }
+    , column_(1) { }
 
 char Scanner::advance() {
-    if(idx_ >= source_.size()) return '\0';
-    char c = source_[idx_];
-    idx_ += 1;
+    if(in_.peek() == EOF) return '\0';
+    char c = in_.get();
     
     if(c == '\n') {
         column_ = 0;
@@ -46,8 +44,8 @@ void Scanner::updateTokenStart() {
 }
 
 char Scanner::peek() {
-    if(idx_ >= source_.size()) return '\0';
-    return source_[idx_];
+    if(in_.peek() == EOF) return '\0';
+    return in_.peek();
 }
 
 int Scanner::line() const {

@@ -8,7 +8,7 @@
 #include "Error.hpp"
 #include <sstream>
 
-namespace AP::CompilerKit {
+namespace CompilerKit {
 
 Error Error::Syntax(const string &expected, const Token &token) {
     
@@ -16,15 +16,15 @@ Error Error::Syntax(const string &expected, const Token &token) {
     
     stream << "expected " << expected;
     stream << ", found " << token.type() << " instead";
-    auto [line, col] = token.sourceLoc();
     
-    return Error("syntax", stream.str(), line, col);
+    auto loc = token.sourceLoc();
+    return Error("syntax", stream.str(), loc.first, loc.second);
 }
 
 
 Error Error::Semantic(const string& message, const Token& token) {
-    auto [line, col] = token.sourceLoc();
-    return Error("semantic", message, line, col);
+    auto loc = token.sourceLoc();
+    return Error("semantic", message, loc.first, loc.second);
 }
 
 Error::Error(const string& type, const string& message, int line, int column)

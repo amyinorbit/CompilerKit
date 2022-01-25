@@ -15,7 +15,7 @@
 
 #define STACK_SIZE (1024)
 
-namespace AP::CompilerKit {
+namespace CompilerKit {
 
 enum class Instruction {
     Halt,
@@ -59,6 +59,6 @@ void run(const Program& program);
 
 }
 
-std::ostream& operator<<(std::ostream& out, const AP::CompilerKit::Program& program);
+std::ostream& operator<<(std::ostream& out, const CompilerKit::Program& program);
 
 #endif /* Program_hpp */

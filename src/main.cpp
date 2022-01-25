@@ -6,30 +6,43 @@
 //
 
 #include <iostream>
+#include <fstream>
 #include "PALScanner.hpp"
 #include "PALParser.hpp"
 
-const std::string prog = R"SOURCE(
-PROGRAM Factorial
-WITH i, n, factorial AS INTEGER
-IN
-    INPUT i
-    n = 1
-    UNTIL n = i REPEAT
-    ENDLOOP
-    OUTPUT factorial
-END
-)SOURCE";
+[[noreturn]]
+void exit_error(const std::string& error) {
+    std::cerr << "fatal error: " << error << "\n";
+    std::exit(EXIT_FAILURE);
+}
+
+[[noreturn]]
+void exit_usage(const std::string& error) {
+    std::cerr << "fatal error: " << error << "\n";
+    std::cerr << "usage: palc IN_FILE\n";
+    std::exit(EXIT_FAILURE);
+}
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    PALScanner scanner(prog);
+    
+    if(argc != 2) {
+        exit_usage("wrong parameters");
+    }
+
+    std::string path{argv[1]};
+    std::ifstream source{path};
+    if(!source.is_open()) {
+        exit_error("cannot open '" + path + "' for reading");
+    }
+    
+    PALScanner scanner(source);
     PALParser parser(scanner);
     
-    std::cout << "result: " << (parser.compile() ? "true" : "false" ) << "\n";
+    bool result = parser.compile();
     
     for(const auto& e: parser.errors()) {
         std::cout << e << "\n";
     }
-    return 0;
+    return result ? EXIT_SUCCESS : EXIT_FAILURE;
 }

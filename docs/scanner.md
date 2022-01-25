@@ -1,4 +1,4 @@
-#  AP::CompilerKit::Scanner
+#  CompilerKit::Scanner
 
 `Scanner` is the base class you will use to create your lexical analyser. It provides convenience
 methods to advance and consume the source string, and to generate source tokens that can then be
@@ -8,7 +8,7 @@ must implement at least the `Token lex()` function**.
 
 ```c++
 include "CompilerKit/Scanner::hpp"
-using namespace AP::CompilerKit;
+using namespace CompilerKit;
 
 class MyScanner : public Scanner {
 public:
