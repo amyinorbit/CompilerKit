@@ -28,6 +28,9 @@ public:
     /// Advances the lexer by one character in the source, and returns that character.
     char advance();
     
+    /// Returns whether `this` is at the end of its source stream.
+    bool end() const;
+    
 protected:
     
     /// Marks the current position in the source text as the start of a token.

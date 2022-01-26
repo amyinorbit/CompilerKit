@@ -26,6 +26,10 @@ char Scanner::advance() {
     return c;
 }
 
+bool Scanner::end() const {
+    return (in_.peek() == EOF);
+}
+
 Token Scanner::current() const {
     return current_;
 }
