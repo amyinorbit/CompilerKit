@@ -5,13 +5,13 @@
 #  Created by Amy Parent on 25/01/2022.
 #
 
-TARGET := "palc"
+TARGET ?= block1
 SRC_DIR := ./src
 LIB_DIR := $(SRC_DIR)/CompilerKit
 TMP_DIR := build
 
-CPPFLAGS := -std=c++14 -Wall -Werror
-LDFLAGS := -std=c++14
+CPPFLAGS := -g3 -ggdb -O0 -std=c++14 -Wall -Werror
+LDFLAGS := -g3 -ggdb -O0 -std=c++14
 
 LIB_SRC := $(wildcard $(LIB_DIR)/*.cpp)
 LIB_HDR := $(wildcard $(LIB_DIR)/*.hpp)
@@ -30,7 +30,8 @@ $(TARGET): directories $(ALL_OBJ) $(ALL_HDR)
 	$(CXX) -o $(TARGET) $(ALL_OBJ) $(LDFLAGS)
 
 clean:
-	rm -rf $(OUT_DIR)
+	rm -rf $(TMP_DIR)
+	rm -f $(TARGET)
 
 directories: $(OUT_DIR) $(TMP_DIR) $(TMP_DIR)/CompilerKit
 

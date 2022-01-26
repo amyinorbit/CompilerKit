@@ -7,8 +7,11 @@
 
 #include <iostream>
 #include <fstream>
-#include "PALScanner.hpp"
-#include "PALParser.hpp"
+#include "Block1Scanner.hpp"
+#include "Block1Parser.hpp"
+// #include "PALParser.hpp"
+
+const char *program = NULL;
 
 [[noreturn]]
 void exit_error(const std::string& error) {
@@ -19,12 +22,12 @@ void exit_error(const std::string& error) {
 [[noreturn]]
 void exit_usage(const std::string& error) {
     std::cerr << "fatal error: " << error << "\n";
-    std::cerr << "usage: palc IN_FILE\n";
+    std::cerr << "usage: " << program << " IN_FILE\n";
     std::exit(EXIT_FAILURE);
 }
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
+    program = argv[0];
     
     if(argc != 2) {
         exit_usage("wrong parameters");
@@ -36,13 +39,28 @@ int main(int argc, const char * argv[]) {
         exit_error("cannot open '" + path + "' for reading");
     }
     
-    PALScanner scanner(source);
-    PALParser parser(scanner);
+    Block1Scanner scanner(source);
+    Block1Parser parser(scanner);
     
-    bool result = parser.compile();
+    // try {
+    //     parser.compile();
+    // } catch(Error& err) {
+    //     std::cout << err << "\n";
+    //     return EXIT_FAILURE;
+    // }
     
-    for(const auto& e: parser.errors()) {
-        std::cout << e << "\n";
+    bool success = parser.compile();
+    
+    for(const auto& error: parser.errors()) {
+        std::cout << error << "\n";
     }
-    return result ? EXIT_SUCCESS : EXIT_FAILURE;
+    
+    return success ? EXIT_SUCCESS : EXIT_FAILURE;
+    
+    // while(true) {
+    //     auto token = scanner.lex();
+    //     if(token.is(Token::EndOfFile)) break;
+    //
+    //     std::cout << "{" << token.type() << "} " << token.text() << "\n";
+    // }
 }

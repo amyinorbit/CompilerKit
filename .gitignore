@@ -3,5 +3,9 @@ PALParser.*
 PALSema.*
 src/PAL*
 src/Block1*
+src/pal
+src/block1
+build/*
+*.o
 .DS_Store
 *.xcodeproj
