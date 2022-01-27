@@ -13,7 +13,7 @@ using namespace CompilerKit;
 class MyScanner : public Scanner {
 public:
 
-    MyScanner(const std::string& source) : Scanner(source) {}
+    MyScanner(const std::istream& source) : Scanner(source) {}
     virtual ~MyScanner() {}
     
     Token lex() override {
@@ -26,19 +26,21 @@ public:
 
 These methods can be called on `Parser` from anywhere in the source code.
 
-#### `Scanner::Scanner(const std::string& source)`
+#### `Scanner::Scanner(const std::istream& source)`
 
 Creates a new scanner that operates on `source`.
+
+**Parameters:**
+
+- `source`: the input stream to read characters from.
 
 #### `current() const -> Token`
 
 Returns the last token that was lexed by `this`.
 
-#### `advance() -> char`
+### `end() const -> bool`
 
-Advances the scanner by one more character in the source string, if it is available,
-and returns it. If the scanner is at the end of the source string, it will always return the
-null character, `\0`.
+Returns whether the scanner is at the end of its input stream.
 
 ***
 
@@ -48,10 +50,16 @@ null character, `\0`.
 These methods are available when writing a class that derives from `Scanner`.
 
 
-#### `Scanner::startToken() -> void`
+#### `advance() -> char`
 
-Marks the current position in the source text as the start of a token. Use in combination with
-`makeToken()`.
+Advances the scanner by one more character in the source string, if it is available,
+and returns it. If the scanner is at the end of the source string, it will always return the
+null character, `\0`.
+
+#### `updateTokenStart() -> void`
+
+Sets the point in the source at which a new token starts. This is called once you've consumed
+any whitespace before a token.
 
 #### `peek() -> char`
 
@@ -84,7 +92,3 @@ and text are different (number literals, non-keyword identifiers, etc).
  - `type`: the type of token to create. See [`Token`](token.html) for existing types.
  - `text`: the text of the new token.
 
-#### `updateTokenStart() -> void`
-
-Sets the point in the source at which a new token starts. This is called once you've consumed
-any whitespace before a token.
