@@ -13,6 +13,6 @@ four main parts to CompilerKit, each discussed and documented on their own page:
 There are also some ancillary modules that are used throughout the source:
 
  * [`Token`](token.html) defines a source token type, which encodes text, a type and a location;
- * [`Error`](errors.html) defines an error type and convenience functions to report them;
- * [`Program`](program-runtime.html) defines a simplistic machine language and lets you emit and run
+ * [`Error`](error.html) defines an error type and convenience functions to report them;
+ * [`Program`](program.html) defines a simplistic machine language and lets you emit and run
    programs in a basic virtual machine runtime.

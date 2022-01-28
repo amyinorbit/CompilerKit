@@ -31,12 +31,14 @@ enum class Instruction {
     Sub,
     Mul,
     Div,
-    And,
-    Or,
-    Not,
+    
     Greater,
     Less,
     Equals,
+    
+    And,
+    Or,
+    Not,
     
     Jump,
     Loop,

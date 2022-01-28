@@ -1,6 +1,6 @@
 # CompilerKit::Codegen
 
-`Codegen` provides an API that can be used to create small but wokring binary programs using
+`Codegen` provides an API that can be used to create small but working bytecode programs using
 the virtual instruction set described in [`Program`](program.html). It follows `Program`'s
 stack-based model, and abstracts away labels, jumps, loops, constants and variables.
 
@@ -31,6 +31,12 @@ gen.endLoop();
 #### `Codegen()`
 
 Creates a new `Codegen` instance.
+
+#### `getProgram() -> Program`
+
+Returns the bytecode program that has been generated.
+
+***
 
 #### `emit(Instruction instr, ...) -> void`
 

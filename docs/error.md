@@ -34,7 +34,7 @@ Returns a new instance of `Error` for a semantic error at a given token in the s
 - `message`: the error message to attach to the error.
 - `token`: the token where the error was found.
 
-#### `Error Generic(const string& type, const string& message, const Token& token) -> Error`
+#### `Error::Generic(const string& type, const string& message, const Token& token) -> Error`
 
 Returns a compiler error of a given type, at a given token and with a given message.
 
