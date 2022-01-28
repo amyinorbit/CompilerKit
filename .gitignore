@@ -5,6 +5,7 @@ src/PAL*
 src/Block1*
 src/pal
 src/block1
+src/main.cpp
 build/*
 *.o
 .DS_Store
