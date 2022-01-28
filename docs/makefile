@@ -1,10 +1,10 @@
 MARKDOWN := pandoc --from gfm --to html --standalone --shift-heading-level-by=-1
 
 IN_DIR := .
-OUT_DIR := ./out
+OUT_DIR := .
 
 CSS := style.css
-ALL_SRC := $(wildcard $(IN_DIR)/*.md) $(IN_DIR)/$(CSS)
+ALL_SRC := $(wildcard $(IN_DIR)/*.md)
 ALL_OUT := $(patsubst $(IN_DIR)/%, $(OUT_DIR)/%, $(ALL_SRC:.md=.html))
 MD_OPT := -t html5 --toc -c $(CSS)
 
@@ -14,7 +14,7 @@ all: $(OUT_DIR) $(CSS) $(ALL_OUT)
 	
 
 clean:
-	rm -rf $(OUT_DIR)
+	rm -rf $(ALL_OUT)
 	
 $(OUT_DIR):
 	mkdir -p $(OUT_DIR)
