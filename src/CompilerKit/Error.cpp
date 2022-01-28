@@ -27,6 +27,11 @@ Error Error::Semantic(const string& message, const Token& token) {
     return Error("semantic", message, loc.first, loc.second);
 }
 
+Error Error::Generic(const string& type, const string& message, const Token& token) {
+    auto loc = token.sourceLoc();
+    return Error(type, message, loc.first, loc.second);
+}
+
 Error::Error(const string& type, const string& message, int line, int column)
 : line_(line)
 , column_(column)

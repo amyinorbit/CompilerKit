@@ -22,6 +22,7 @@ public:
     /// Creates a syntax error for a given expected token type at a given token.
     static Error Syntax(const string& expected, const Token& token);
     static Error Semantic(const string& message, const Token& token);
+    static Error Generic(const string& type, const string& message, const Token& token);
     
     // MARK: - comparison operators for nice sorting
     bool operator<(const Error& other) const;
