@@ -8,6 +8,7 @@
 #include "Codegen.hpp"
 #include <cstdio>
 #include <cstdarg>
+#include <cassert>
 
 namespace CompilerKit {
 
