@@ -76,8 +76,10 @@ bool RecoveringParser::expect(const std::string &type) {
 }
 
 
-void RecoveringParser::addError(const Error& error) {
-    errors_.push_back(error);
+void RecoveringParser::syntaxError(const std::string& expected) {
+    Error err = Error::Syntax(expected, current());
+    addError(err);
+    throw err;
 }
 
 }

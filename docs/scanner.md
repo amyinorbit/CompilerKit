@@ -13,7 +13,7 @@ using namespace CompilerKit;
 class MyScanner : public Scanner {
 public:
 
-    MyScanner(const std::istream& source) : Scanner(source) {}
+    MyScanner(std::istream& source) : Scanner(source) {}
     virtual ~MyScanner() {}
     
     Token lex() override {

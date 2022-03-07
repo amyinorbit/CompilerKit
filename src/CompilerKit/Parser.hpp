@@ -30,8 +30,6 @@ public:
     
     virtual void addError(const Error& error);
 protected:
-    std::vector<Error> errors_;
-    
     /// Returns the scanner's current token. Same as `calling scanner().current()`.
     Token current() const;
     
@@ -49,9 +47,10 @@ protected:
     virtual bool expect(const std::string& type);
     
     /// Emits a syntax error, and aborts parse.
-    void syntaxError(const std::string& expected);
+    virtual void syntaxError(const std::string& expected);
     
 private:
+    std::vector<Error> errors_;
     Scanner& scanner_;
 };
 
@@ -66,8 +65,8 @@ public:
     virtual bool isRecovering() const { return isRecovering_; }
     
 protected:
-    virtual void addError(const Error& error);
-    bool expect(const std::string& type) final;
+    virtual bool expect(const std::string& type) final;
+    virtual void syntaxError(const std::string& expected) final;
 private:
     bool isRecovering_ = false;
 };
