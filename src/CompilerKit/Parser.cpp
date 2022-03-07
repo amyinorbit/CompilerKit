@@ -54,6 +54,7 @@ void Parser::parse() {
     
     try {
         recStarter();
+        expect(Token::EndOfFile);
     } catch(const Error &err) {
         (void)err;
     }
@@ -95,6 +96,7 @@ void RecoveringParser::syntaxError(const std::string& expected) {
 void RecoveringParser::parse() {
     scanner().lex();
     recStarter();
+    expect(Token::EndOfFile);
 }
 
 }
