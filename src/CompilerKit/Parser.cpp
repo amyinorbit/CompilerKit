@@ -40,12 +40,23 @@ bool Parser::expect(const std::string &type) {
 }
 
 void Parser::syntaxError(const std::string& expected) {
-    addError(Error::Syntax(expected, current()));
+    Error err = Error::Syntax(expected, current());
+    addError(err);
+    throw err;
 }
 
 void Parser::addError(const Error &error) {
     errors_.push_back(error);
-    throw error;
+}
+
+void Parser::parse() {
+    scanner().lex();
+    
+    try {
+        recStarter();
+    } catch(...) {
+        
+    }
 }
 
 RecoveringParser::RecoveringParser(Scanner& scanner) : Parser(scanner), isRecovering_(false) {
@@ -77,9 +88,13 @@ bool RecoveringParser::expect(const std::string &type) {
 
 
 void RecoveringParser::syntaxError(const std::string& expected) {
-    Error err = Error::Syntax(expected, current());
-    addError(err);
-    throw err;
+    addError(Error::Syntax(expected, current()));
+    isRecovering_ = true;
+}
+
+void RecoveringParser::parse() {
+    scanner().lex();
+    recStarter();
 }
 
 }

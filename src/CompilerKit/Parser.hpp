@@ -22,6 +22,9 @@ public:
     Parser(Scanner& scanner);
     virtual ~Parser() {}
     
+    /// Start lexing and call the `recStarter()` method.
+    virtual void parse();
+    
     /// Returns a list of the errors that have occured during compilation.
     const std::vector<Error>& errors() const { return errors_; }
     
@@ -30,6 +33,10 @@ public:
     
     virtual void addError(const Error& error);
 protected:
+    
+    /// The first recogniser, called by `parse()`. This must be implemented by subclasses.
+    virtual void recStarter() = 0;
+    
     /// Returns the scanner's current token. Same as `calling scanner().current()`.
     Token current() const;
     
@@ -60,6 +67,9 @@ class RecoveringParser : public Parser {
 public:
     RecoveringParser(Scanner& scanner);
     virtual ~RecoveringParser() {}
+    
+    /// Start lexing and call the `recStarter()` method.
+    virtual void parse();
     
     /// Returns whether the parser is currently in recovery mode.
     virtual bool isRecovering() const { return isRecovering_; }
