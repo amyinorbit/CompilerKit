@@ -10,3 +10,5 @@ build/*
 *.o
 .DS_Store
 *.xcodeproj
+block1
+*.zip

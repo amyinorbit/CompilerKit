@@ -54,8 +54,8 @@ void Parser::parse() {
     
     try {
         recStarter();
-    } catch(...) {
-        
+    } catch(const Error &err) {
+        (void)err;
     }
 }
 
