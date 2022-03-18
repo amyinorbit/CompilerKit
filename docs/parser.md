@@ -18,7 +18,7 @@ using namespace CompilerKit;
 class MyParser : public Parser {
 public:
     MyParser(Scanner& scanner) : Parser(scanner) {}
-    virtual ~MyParser {}
+    virtual ~MyParser() {}
     
     void compile() {
         ...
