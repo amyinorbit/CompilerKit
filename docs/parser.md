@@ -7,9 +7,11 @@ stream of tokens.
 
 `Parser` is also the driving logic of your compiler, and provides an interface to register errors,
 both from itself (`Error::Syntax`) and from other parts of your compiler. If your parser is derived
-from `Parser`, the first call to `addError()` will also `throw()`. If it is derived from
+from `Parser`, the first call to `syntaxError()` will also `throw()`. If it is derived from
 `RecoveringParser`, then errors will be stored, and the parser will go into recovery.
 
+To implement your own parser, you must subclass `Parser` or `RecoveringParser`, and implement
+at least the `recStarter()` method, which will be called by `Parser.parse()`.
 
 ```c++
 include "CompilerKit/Parser::hpp"
@@ -20,7 +22,7 @@ public:
     MyParser(Scanner& scanner) : Parser(scanner) {}
     virtual ~MyParser() {}
     
-    void compile() {
+    void recStarter() override {
         ...
     }
 };
@@ -37,6 +39,10 @@ Creates a new instance of `Parser`.
 
 - `scanner`: the `Scanner` instance used to generate tokens from the source string.
 
+#### `parse()`
+
+Starts the parsing process and calls the implementation-defined `recStarter()` method. Errors
+thrown during compilation are caught and interrupt the parsing process.
 
 #### `errors() const -> const std::vector<Error>&`
 
@@ -50,7 +56,7 @@ instances of `Parser`.
 #### `addError(const Error& error)`
 
 Emits a compilation error. Errors can be emitted from anywhere, and are not necessarily syntax
-errors. For instances of `Parser`, the error will be thrown after it has been logged.
+errors.
 
 **Parameters:**
 
@@ -105,7 +111,9 @@ lexes one more token and returns true. If it isn't, emits a syntax error and ret
 
 #### `syntaxError(const std::string& expected) -> void`
 
-Emits a syntax error, informing the user that a token of a unexpected type was found.
+Emits a syntax error, informing the user that a token of a unexpected type was found. For instances
+of `Parser`, the error will be thrown after it has been logged. For instances of `RecoveringParser`,
+the parser goes into recovery.
 
 **Parameters:**
 
@@ -114,3 +122,17 @@ Emits a syntax error, informing the user that a token of a unexpected type was f
 
 # CompilerKit::RecoveringParser
 
+## Public Interface
+
+#### `parse()`
+
+Starts the parsing process and calls the implementation-defined `recStarter()` method.
+
+#### `syntaxError(const std::string& expected) -> void`
+
+Emits a syntax error, informing the user that a token of a unexpected type was found. For
+instances of `RecoveringParser`, the parser goes into recovery.
+
+**Parameters:**
+
+- `expected`: the type of token that was expected.
